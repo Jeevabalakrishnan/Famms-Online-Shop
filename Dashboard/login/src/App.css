@@ -1,0 +1,14 @@
+.header-name{
+    display: inline-block;
+}
+.defalut{
+    text-decoration: none;
+color: gray;
+margin-left: 5px;
+}
+.dropdown-toggle::after{
+    color: black;
+}
+.map-box,.chart-box{
+    height: 260px;
+}
