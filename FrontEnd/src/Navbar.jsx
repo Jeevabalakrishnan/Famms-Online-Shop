@@ -96,12 +96,14 @@ import { Col, Nav, NavDropdown, Row, Navbar } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import { FaSearch } from "react-icons/fa";
+import { useSelector} from 'react-redux';
 
 const Navbarsection = () => {
   const [expanded, setExpanded] = useState(false);
   const [search, setSearch] = useState(false);
   const [searchInput, setSearchInput] = useState(""); // State for search input
   const [searchResults, setSearchResults] = useState([]); // State for search results
+    const cartItems = useSelector((state) => state.cart.items);
 
   const location = useLocation();
   const getLinkClass = (path) => {
@@ -169,8 +171,18 @@ const Navbarsection = () => {
                     <Nav.Link as={Link} onClick={handlenavclose} className={getLinkClass('/contact')} to='/contact'>Contact</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link as={Link} onClick={handlenavclose} className={getLinkClass('/cart')} to='/cart'><PiShoppingCartSimpleFill style={{ fontSize: "20px" }} /></Nav.Link>
-                  </Nav.Item>
+  <Nav.Link as={Link} onClick={handlenavclose} className={getLinkClass('/cart')} to='/cart'>
+    <PiShoppingCartSimpleFill style={{ fontSize: "20px", position: "relative" }} />
+    {cartItems.length > 0 && (
+      <span
+        style={{position: "absolute", top: "-5px",right: "-5px",backgroundColor: "red",color: "white",borderRadius: "50%",width: "20px",height: "20px", display: "flex",alignItems: "center", justifyContent: "center",
+          fontSize: "12px"  }}
+      >
+        {cartItems.length}
+      </span>
+    )}
+  </Nav.Link>
+</Nav.Item>
                   <Nav.Item>
                     <Nav.Link as={Link} onClick={Search} className='search navlink' to='/home'><FaSearch /></Nav.Link>
                   </Nav.Item>

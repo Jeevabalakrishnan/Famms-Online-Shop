@@ -1,75 +1,69 @@
-// import React from 'react'
-// import { Container } from 'react-bootstrap';
-// import { Link } from 'react-router-dom';
-// import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-// const Categories = () => {
-//   return (
-//       <Container fluid className="py-4 bg-light min-vh-100">
-//         <div> <h1 className="mb-4 header-name">Categories</h1> <Link to='/' className='defalut'>Home<MdOutlineKeyboardArrowRight /></Link></div>
-//         </Container>
-//   )
-// }
-
-// export default Categories;
-
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Table, Button, Modal, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 const Categories = () => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([
+    { _id: 1, name: "Men's Dress", sortOrder: 1 },
+    { _id: 2, name: "Women's Dress", sortOrder: 2 }
+  ]);
   const [show, setShow] = useState(false);
   const [categoryName, setCategoryName] = useState('');
-
-  // Dummy load - Replace with actual API call
-  useEffect(() => {
-    fetch('/api/categories') // You will need to set up this API
-      .then(res => res.json())
-      .then(data => setCategories(data))
-      .catch(err => console.error(err));
-  }, []);
+  const [sortOrder, setSortOrder] = useState('');
 
   const handleAddCategory = () => {
-    fetch('/api/categories', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: categoryName }),
-    })
-      .then(res => res.json())
-      .then(data => {
-        setCategories([...categories, data]);
-        setCategoryName('');
-        setShow(false);
-      });
+    const newCategory = {
+      _id: categories.length + 1,
+      name: categoryName,
+      sortOrder: parseInt(sortOrder) || categories.length + 1
+    };
+    setCategories([...categories, newCategory]);
+    setCategoryName('');
+    setSortOrder('');
+    setShow(false);
   };
 
   return (
     <Container fluid className="py-4 bg-light min-vh-100">
-      <h1 className="mb-4 header-name">Categories</h1>
-      <Link to="/" className="defalut">
+     
+        <h1 className="mb-4 header-name">Categories</h1>
+  <Link to="/" className="defalut">
         Home <MdOutlineKeyboardArrowRight />
       </Link>
-
-      <Button className="my-3" onClick={() => setShow(true)}>Add Category</Button>
-
-      <Table striped bordered hover>
+      <div className="d-flex justify-content-end align-items-center">
+        <Button variant="primary" onClick={() => setShow(true)}>+ Add Category</Button>
+      </div>
+      <Table bordered hover className="mt-3">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Category Name</th>
+            <td style={{ width: "1px" }} className="text-center">
+              <Form.Check type="checkbox" />
+            </td>
+            <th className="text-left">Category Name</th>
+            <th className="text-right">Sort Order</th>
+            <th className="text-right">Action</th>
           </tr>
         </thead>
         <tbody>
-          {categories.map((cat, index) => (
+          {categories.map((cat) => (
             <tr key={cat._id}>
-              <td>{index + 1}</td>
-              <td>{cat.name}</td>
+              <td className="text-center">
+                <Form.Check type="checkbox" />
+              </td>
+              <td className="text-left">{cat.name}</td>
+              <td className="text-right">{cat.sortOrder}</td>
+              <td className="text-right">
+                <Button size="sm" variant="primary">
+                  <i className="fa fa-pencil"></i> Edit
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>
       </Table>
 
+      {/* Add Category Modal */}
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Add New Category</Modal.Title>
@@ -81,6 +75,14 @@ const Categories = () => {
               type="text"
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Sort Order</Form.Label>
+            <Form.Control
+              type="number"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
             />
           </Form.Group>
         </Modal.Body>

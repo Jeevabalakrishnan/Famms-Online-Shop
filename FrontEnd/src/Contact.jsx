@@ -30,11 +30,10 @@ const Contact = () => {
           if (response.ok) {
               alert("Data saved successfully!");
               document.querySelector("form").reset();
-          } else {
-              const errorData = await response.json(); 
-              console.error("Server Error:", errorData);
-              alert(`Failed to save data: ${errorData.error || "Unknown error"}`);
-          }
+          }if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Unknown error");
+        }
       } catch (error) {
           console.error("Network Error:", error); 
           alert(`An unexpected error occurred: ${error.message}`);
