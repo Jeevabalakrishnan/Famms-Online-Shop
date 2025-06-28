@@ -1,4 +1,4 @@
-import Famms from './Famms';
+import Famms from './user/Famms';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { ToastContainer } from 'react-toastify';

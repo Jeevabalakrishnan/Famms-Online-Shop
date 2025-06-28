@@ -3,7 +3,27 @@
   font-family: 'Montserrat', sans-serif;
   padding: 0;
   margin: 0;
+    user-select: none; 
 }
+
+input{
+  cursor: auto;
+}
+.header-name{
+  display: inline-block;
+}
+.defalut{
+  text-decoration: none;
+color: gray;
+margin-left: 5px;
+}
+.dropdown-toggle::after{
+  color: black;
+}
+.map-box,.chart-box{
+  height: 260px;
+}
+
 .login-box-overlay {
   position:fixed;
   top: 0;
@@ -109,6 +129,7 @@ right: 92px;
 .dropdown-toggle:hover {
   color: #f7444e !important;
   background-color: #fff;
+  cursor: pointer;
   
 }
 
@@ -372,6 +393,9 @@ margin-top: -22px;
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  border: none;
+  outline: none;
+overflow: hidden;
 }
 
 .product-box:hover .product-img {
@@ -405,6 +429,7 @@ margin-top: -22px;
   justify-content: center;
   transition: all .3s !important;
   margin: 5px 0 !important;
+  
 }
 
 .option1 {
@@ -442,6 +467,8 @@ margin-top: -22px;
   max-width: 100%;
   max-height: 160px;
   transition: all .3s;
+  border: none !important;
+  outline: none !important;
 }
 
 .product-details {
@@ -597,6 +624,7 @@ margin: 0 1rem;
     float: left;
     margin-top: 5px;
     margin-left: 1rem;
+    cursor: pointer;
 }
 .newsletter-box{
   position: relative;
@@ -1069,7 +1097,9 @@ letter-spacing: 1px !important;
   .footer-section h3,.footer-link,.newsletter-box p,.mail-input{
     margin-left: 0  !important;
   }
-
+.checkout-left {
+  margin-right: 0 !important;
+}
 }
 @media screen and (min-width: 375px) and (max-width: 425px) {
   .detail-box h1 {
@@ -1097,6 +1127,13 @@ max-width: 100%;
   .carousel-control-next {
     margin-left: 10px;
   }
+  .checkout-left {
+  margin-right: 0 !important;
+}
+.delivery-btn{
+  font-size: 10px !important; 
+padding: 10px!important;
+}
 }@media screen and (min-width: 320px) and (max-width:375px) {
 
   .navbar-toggler{
@@ -1143,6 +1180,36 @@ max-width: 100% !important;
   right: 13px !important;
   padding:0 5px !important;
 }
+.checkout-left {
+  flex: 3;
+  margin-right: 0;
+}
+.logout{
+  width: 40%;
+  font-size: small;
+  margin-left: 15px;
+}
+.checkout-container {
+  padding: 0 !important;
+}
+.checkout-left {
+  margin-right: 0 !important;
+}
+.pay-btn{
+  width: 40%;
+  font-size: small;
+}
+
+.form-check{
+  padding: 0 !important;
+}
+.address-form{
+  margin-top: 20px;
+}
+.delivery-btn{
+  font-size: 10px !important; 
+padding: 5px 5px !important;
+}
 }
 
 
@@ -1187,7 +1254,7 @@ max-width: 100% !important;
 }
 
 .step-content {
-  padding: 20px;
+  padding: 30px ;
 }
 
 .price-box {
@@ -1202,13 +1269,26 @@ max-width: 100% !important;
   justify-content: space-between;
   margin: 10px 0;
 }
+.form-check{
+  padding: 5px;
+}
+.form-check input:checked[type=radio] {
+background-color: #f7444e;
+border-color: #f7444e;
+}
+.form-check input[type=radio]{
+  position: absolute;
+  font-size: medium;
+  padding: 10px 10px;
+margin-top: 7px;
+}
 .form-check-label{
   margin-top: 5px;
 }
-.form-check-input:checked + .form-check-label {
-  background-color: cadetblue;
-  padding: 5px; /* Optional: Adds some spacing */
-  transition: background-color 0.3s ease; /* Smooth color transition */
+.selected-bg {
+  background-color: #f1f3f6; /* Change to any color you prefer */
+  border-radius: 5px; /* Optional, for better UI */
+  padding: 15px 5px; /* Adjust for spacing */
 }
 .address-form{
   padding: 15px;
@@ -1216,3 +1296,30 @@ max-width: 100% !important;
 .form-select{
   padding: 10px;
 }
+.select-form{
+    padding: 12px;
+}
+.small-checkbox input[type="checkbox"] {
+  transform: scale(0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto !important;
+}
+
+.reduced-padding th,
+.reduced-padding td {
+  padding: 10px !important;
+  text-align: center; /* Ensures text is centered horizontally */
+  vertical-align: middle !important; /* Centers content vertically */
+}
+
+table {
+  text-align: center;
+  width: 100%;
+}
+
+tbody tr {
+  display: table-row;
+}
+
